@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <string> 
+#include <string>
 #include <set>
 #include <map>
 #include <sstream>
@@ -66,7 +66,7 @@ void EilutesIrPasikartojimai (const string& failoPavadinimas, map<string, map<in
         const map<int, int>& pasikartojimai = irasas.second;
 
         if (pasikartojimai.size() > 1 && !any_of(zodis.begin(), zodis.end(), ::isdigit)) {
-            stringstream eiluciuNumeriaiSrautas;
+            stringstream eiluciuNumeriaiSrautas;                                //Eilučių numerių formavimas:
             for (const auto& eilutesirasas : pasikartojimai) {
                 eiluciuNumeriaiSrautas << eilutesirasas.first << " (" << eilutesirasas.second << "); ";
             }
@@ -83,5 +83,14 @@ void EilutesIrPasikartojimai (const string& failoPavadinimas, map<string, map<in
     catch (const runtime_error& e) {
         cerr << e.what() << endl;
     } 
+}
 
+void TaiFailas(const string& failoVardas, const vector<string>& ZodisSuTai) {
+    ofstream out(failoVardas);
+    out <<"Zodziai su junginiu - tai: "<<endl;
+    out <<"-------------------------------- "<<endl;
+    for (const auto& zodis : ZodisSuTai) {
+        out << zodis << endl;
+    }
+    out.close();
 }
