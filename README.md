@@ -14,4 +14,7 @@ Programa naudoja asociatyvų konteinerį **map**, kuris turi raktą ir reikšmes
 Programoje, kad galėtume iš ilgų URL adresų gauti sutrumpintus ir unikalius domenus, buvo naudojamas konteineris **set** ir **regex** struktūros ir funkcijos. Apsirašę paiešką URL adresų, kurie bendrai prasideda: http, https arba ftp, pagal tokią pradžią buvo ieškomi URL adresai tekste. Vėliau šie adresai buvo perduodami į funkciją, kuri ištraukia domeną ir gražiną į programą, papildydama konteinerį **set**. Po to, kai nuoroda buvo apdorota, ji buvo ištrinama iš teksto. Išvedimas atrodo taip:<br><br>
 <img width="381" alt="Снимок экрана 2023-12-28 в 11 39 23" src="https://github.com/Arina1311/Egzaminas/assets/144428021/b4e1ac3b-0c93-4e24-b74e-1ed03281b1da"><br>
 
+# Programos paieška žodžių su junginiu tai
+Programoje papildomai buvo sukurta funkcija, kuri suranda žodyje junginį "tai". Išvedimas atrodo taip:<br><br>
+<img width="349" alt="Снимок экрана 2023-12-28 в 17 36 31" src="https://github.com/Arina1311/Egzaminas/assets/144428021/ff3b97ad-8c39-4af5-be96-d35b6d757454"><br>
 
