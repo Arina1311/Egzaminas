@@ -79,21 +79,7 @@ int main() {
     ivestiesFailas.close();
 
     Nuorodos("Nuorodos.txt", visiURL);
-    /*
-    ofstream urlFailas("Nuorodos.txt");
-
-    if (!urlFailas.is_open()) {
-        cerr << "Klaida atidarant nuorodu faila." << endl;
-        return 1;
-    }
-
-    for (const string& domenas : visiURL) {
-        urlFailas << domenas << endl;
-    }
-    
-    urlFailas.close();
-    */
-    
+   
     /*
     Vel atidarome musu skaitymo faila
     */
@@ -131,54 +117,9 @@ int main() {
     ivestiesFailas.close();
 
     BendrasPasikartojimas ("BendrasPasikartojimai.txt", zodziuPasikartojimai);
-/*
-    ofstream outputFile("BendrasPasikartojimai.txt");
-    if (!outputFile.is_open()) {
-        cerr << "Nepavyko atidaryti rezultato failo!" << endl;
-        return 1;
-    }
 
-    outputFile <<left<<setw(30)<<"| Zodis"<<setw(80)<<"| Pasikartojimai tekste"<<endl;
-    outputFile <<"---------------------------------------------------------------------------------------------------------"<<endl;
-    for (const auto &pora : zodziuPasikartojimai) {
-    if (pora.second.size() > 1 && !any_of(pora.first.begin(), pora.first.end(), ::isdigit)) {
-        outputFile << left << setw(30) << "| " + pora.first << setw(80) << "| " + to_string(pora.second.size()) << endl;
-    }
-    }
-
-    outputFile.close();
-*/
     EilutesIrPasikartojimai ("EilutesIrPasikartojimai.txt", zodziuPasikartojimai);
-/*
-    ofstream rezultatuFailas("EilutesIrPasikartojimai.txt");
 
-    if (!rezultatuFailas.is_open()) {
-        cerr << "Klaida atidarant rezultatu faila." << endl;
-        return 1;
-    }
-
-    rezultatuFailas << left << setw(30) << "| Žodis" << left << setw(80) << "| Eilutes numeris (Pasikartojimai)" << endl;
-    rezultatuFailas << left << setfill('-') << left << setw(110) << " " << setfill(' ') << endl;
-
-    for (const auto& irasas : zodziuPasikartojimai) {
-        const string& zodis = irasas.first;
-        const map<int, int>& pasikartojimai = irasas.second;
-
-        if (pasikartojimai.size() > 1 && !any_of(zodis.begin(), zodis.end(), ::isdigit)) {
-            stringstream eiluciuNumeriaiSrautas;
-            for (const auto& eilutesirasas : pasikartojimai) {
-                eiluciuNumeriaiSrautas << eilutesirasas.first << " (" << eilutesirasas.second << "); ";
-            }
-
-            string eiluciuNumeriai = eiluciuNumeriaiSrautas.str();
-            eiluciuNumeriai.pop_back();
-
-            rezultatuFailas << left << setw(30) << "| " + zodis << left << setw(80) << "| " + eiluciuNumeriai << endl;
-        }
-    }
-
-    rezultatuFailas.close();
-*/
     cout << "Rezultatai eksportuoti i EilutesIrPasikartojimai.txt, BendrasPasikartojimai.txt ir Nuorodos.txt" << endl;
 
     return 0;
