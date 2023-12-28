@@ -10,11 +10,12 @@
 #include <locale>
 #include <codecvt>
 #include <string>
+#include "Funkcijos.h"
 
 using namespace std;
 
-string mazosiosRaides(const string& eilute) {
-    string rezultatas = eilute;
+string mazosiosRaides(const string& zodis) {
+    string rezultatas = zodis;
     for (char& c : rezultatas) {
         c = tolower(c);
     }
@@ -43,6 +44,9 @@ string isgautiDomena(const string& url) {
 int main() {
     setlocale(LC_ALL, "lt_LT.UTF-8");
 
+    /*
+    Skaitymas is failo
+    */
     string failoVardas;
     cout << "Iveskite failo pavadinima: ";
     cin >> failoVardas;
@@ -54,26 +58,28 @@ int main() {
         return 1;
     }
 
-    set<string> visiURL;
+    set<string> visiURL; // saugo unikalius domenus
 
-    regex urlRegex("(https?|ftp)://[^\\s/$.?#].[^\\s]*");
+    regex urlRegex("(https?|ftp)://[^\\s/$.?#].[^\\s]*"); 
 
     string eilute;
     while (getline(ivestiesFailas, eilute)) {
-        smatch urlAtitikmuo;
+        smatch urlAtitikmuo;                                    //tikrina atitikmeni su urlRegex
         while (regex_search(eilute, urlAtitikmuo, urlRegex)) {
             string url = urlAtitikmuo[0];
             string domenas = isgautiDomena(url);
             if (!domenas.empty()) {
                 visiURL.insert(domenas);
-                eilute = regex_replace(eilute, regex(url), "");
+                eilute = regex_replace(eilute, regex(url), ""); //iskirpame is eilutes url pakeisdami i tuscias
             }
-            eilute = urlAtitikmuo.suffix().str();
+            eilute = urlAtitikmuo.suffix().str();               //gražina teksto dalį, kuri seka po paskutinio rasto atitikimo ir konvertuoja i string
         }
     }
 
     ivestiesFailas.close();
 
+    Nuorodos("Nuorodos.txt", visiURL);
+    /*
     ofstream urlFailas("Nuorodos.txt");
 
     if (!urlFailas.is_open()) {
@@ -84,9 +90,13 @@ int main() {
     for (const string& domenas : visiURL) {
         urlFailas << domenas << endl;
     }
-
+    
     urlFailas.close();
-
+    */
+    
+    /*
+    Vel atidarome musu skaitymo faila
+    */
     ivestiesFailas.open(failoVardas);
 
     if (!ivestiesFailas.is_open()) {
@@ -120,6 +130,8 @@ int main() {
 
     ivestiesFailas.close();
 
+    BendrasPasikartojimas ("BendrasPasikartojimai.txt", zodziuPasikartojimai);
+/*
     ofstream outputFile("BendrasPasikartojimai.txt");
     if (!outputFile.is_open()) {
         cerr << "Nepavyko atidaryti rezultato failo!" << endl;
@@ -132,11 +144,12 @@ int main() {
     if (pora.second.size() > 1 && !any_of(pora.first.begin(), pora.first.end(), ::isdigit)) {
         outputFile << left << setw(30) << "| " + pora.first << setw(80) << "| " + to_string(pora.second.size()) << endl;
     }
-}
-
+    }
 
     outputFile.close();
-
+*/
+    EilutesIrPasikartojimai ("EilutesIrPasikartojimai.txt", zodziuPasikartojimai);
+/*
     ofstream rezultatuFailas("EilutesIrPasikartojimai.txt");
 
     if (!rezultatuFailas.is_open()) {
@@ -165,7 +178,7 @@ int main() {
     }
 
     rezultatuFailas.close();
-
+*/
     cout << "Rezultatai eksportuoti i EilutesIrPasikartojimai.txt, BendrasPasikartojimai.txt ir Nuorodos.txt" << endl;
 
     return 0;
