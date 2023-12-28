@@ -41,9 +41,18 @@ string isgautiDomena(const string& url) {
     return "";
 }
 
+string isrinktiZodziusSuTai(const string& zodis) {
+        if (zodis.find("tai") != string::npos) 
+            return zodis;
+        else 
+            return "";
+}
+
+
 int main() {
     setlocale(LC_ALL, "lt_LT.UTF-8");
 
+    vector <string> ZodisSuTai;
     /*
     Skaitymas is failo
     */
@@ -109,6 +118,13 @@ int main() {
                 apdorotasZodis.find("www") == string::npos && apdorotasZodis.find("http") == string::npos) {
                 zodziuPasikartojimai[apdorotasZodis][eilutesNumeris]++;
             }
+
+            //ZODZIO PAIESKA SU TAI
+            string tai = isrinktiZodziusSuTai(apdorotasZodis);
+            if (!tai.empty()) {
+                ZodisSuTai.push_back(tai);
+            }
+
         }
 
         eilutesNumeris++;
@@ -117,10 +133,11 @@ int main() {
     ivestiesFailas.close();
 
     BendrasPasikartojimas ("BendrasPasikartojimai.txt", zodziuPasikartojimai);
-
     EilutesIrPasikartojimai ("EilutesIrPasikartojimai.txt", zodziuPasikartojimai);
-
-    cout << "Rezultatai eksportuoti i EilutesIrPasikartojimai.txt, BendrasPasikartojimai.txt ir Nuorodos.txt" << endl;
+    TaiFailas("ZodziaiSuTai.txt", ZodisSuTai);
+    cout << "Rezultatai eksportuoti i EilutesIrPasikartojimai.txt, BendrasPasikartojimai.txt, Nuorodos.txt ir ZodziaiSuTai.txt" << endl;
 
     return 0;
+
+    //regex kur zodis turi tai
 }
